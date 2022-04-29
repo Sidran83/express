@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require('dotenv').config({ path: './.env'});
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST_NAME}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
