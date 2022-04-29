@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
+require('dotenv').config({ path: './.env'});
+
 module.exports = (req, res, next) => {
-  .try{
+  try{
     const token = req.headers.authorization.split('_')[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
@@ -10,6 +12,7 @@ module.exports = (req, res, next) => {
     } else {
       next();
     }
-  } catch(error);
-    res.status(401).json(error: error | 'Requête non authentifiée !');
+  } catch(error) {
+    res.status(401).json({ error: error | 'Requête non authentifiée !' });
+  }
 }
